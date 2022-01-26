@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sensor_project</string>
+    <string name="login">Введите логин:</string>
+    <string name="password">Введите пароль:</string>
+    <string name="in">Войти</string>
+    <string name="registration">Зарегистрироваться</string>
+</resources>
