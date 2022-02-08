@@ -69,7 +69,7 @@ public class Enter extends AppCompatActivity {
         EditText e1 = (EditText) findViewById(R.id.login);
         EditText e2 = (EditText) findViewById(R.id.password);
         String login = e1.getText().toString();
-        String password = e1.getText().toString();
+        String password = e2.getText().toString();
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
@@ -81,6 +81,7 @@ public class Enter extends AppCompatActivity {
         System.out.println(ans);
         if (ans.contains("not ok")){
             Toast.makeText(this, "Введены неверные данные", Toast.LENGTH_SHORT).show();
+            e2.setText("");
         } else if (ans.contains("error")) {
             Toast.makeText(this, "Извините, сервер сейчас не доступен, попробуйте позже", Toast.LENGTH_SHORT).show();
         } else {
@@ -121,7 +122,7 @@ public class Enter extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "http://192.168.145.211:8080" + "/check_user?l=" + arg[0] + "&p=" + arg[1];
+            String url = "https://watersensors.herokuapp.com" + "/check_user?l=" + arg[0] + "&p=" + arg[1];
             System.out.println(url);
             StringBuffer response;
             try {
