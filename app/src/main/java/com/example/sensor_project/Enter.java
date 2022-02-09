@@ -2,7 +2,6 @@ package com.example.sensor_project;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -22,11 +21,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 public class Enter extends AppCompatActivity {
 
@@ -65,7 +62,9 @@ public class Enter extends AppCompatActivity {
     }
 
     public void forget(View view){
-        Toast.makeText(this, "Ты забыл пароль", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Change.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
     public void reg(View view){
@@ -77,7 +76,7 @@ public class Enter extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void enter(View view) throws NoSuchAlgorithmException {
         EditText e1 = (EditText) findViewById(R.id.login);
-        EditText e2 = (EditText) findViewById(R.id.password);
+        EditText e2 = (EditText) findViewById(R.id.password_r);
         String login = e1.getText().toString();
         String password = e2.getText().toString();
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -101,6 +100,7 @@ public class Enter extends AppCompatActivity {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             Cursor c = db.query("sq", null, null, null, null, null, null);
             cv.put("yes", "1");
+            cv.put("my_id", Integer.parseInt(ans));
             db.insert("sq", null, cv);
             cv.clear();
             startActivity(intent);
@@ -119,7 +119,7 @@ public class Enter extends AppCompatActivity {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table sq ("
                     + "id integer primary key autoincrement,"
-                    + "yes text" + ");");
+                    + "yes text," + "my_id integer" + ");");
         }
 
         @Override

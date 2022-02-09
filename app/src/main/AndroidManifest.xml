@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sensor_project">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,9 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sensor_project">
-        <activity
-            android:name=".ChangePassword"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -36,6 +34,7 @@
         </activity>
         <activity android:name=".MainMenu"></activity>
         <activity android:name=".Registration"></activity>
+        <activity android:name=".Change"
+            android:exported="false" />
     </application>
-
 </manifest>
