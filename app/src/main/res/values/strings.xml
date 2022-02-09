@@ -9,5 +9,7 @@
     <string name="password_r">Придумайте пароль</string>
     <string name="password_r_r">Повторите пароль</string>
     <string name="mail_r">Введите почту</string>
-    <string name="mail_r_h">если вы забудете пароль, то на почту прийдет код для восстановления</string>
+    <string name="mail_r_h">если вы забудете пароль, то на почту придет код для восстановления</string>
+    <string name="dalee">Далее</string>
+    <string name="vvedite_kod">Введите код</string>
 </resources>
