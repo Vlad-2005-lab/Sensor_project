@@ -26,16 +26,39 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/login"
+            android:id="@+id/login_r"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/round"
             android:ems="10"
-            android:hint="@string/login"
+            android:hint="@string/login_r"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
+
+        <EditText
+            android:id="@+id/mail_r"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/round"
+            android:ems="10"
+            android:hint="@string/mail_r"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/mail_r_h"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="start"
+            android:paddingLeft="10dp"
+            android:text="@string/mail_r_h"
+            android:textColor="#000000"
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/password"
@@ -44,7 +67,19 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/round"
             android:ems="10"
-            android:hint="@string/password"
+            android:hint="@string/password_r"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <EditText
+            android:id="@+id/password_repeat"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round"
+            android:ems="10"
+            android:hint="@string/password_r_r"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
@@ -53,31 +88,11 @@
             android:id="@+id/enter"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="124dp"
             android:background="@drawable/round_button"
             android:onClick="enter"
-            android:text="@string/in"
-            android:textAllCaps="false" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="70dp"
-            android:gravity="center"
-            android:onClick="forget"
-            android:text="@string/forget" />
-
-        <Button
-            android:id="@+id/registration"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="100dp"
-            android:background="@drawable/round_button_gray"
-            android:onClick="reg"
             android:text="@string/registration"
             android:textAllCaps="false" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

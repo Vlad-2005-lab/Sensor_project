@@ -64,6 +64,16 @@ public class Enter extends AppCompatActivity {
         return hexString.toString();
     }
 
+    public void forget(View view){
+        Toast.makeText(this, "Ты забыл пароль", Toast.LENGTH_SHORT).show();
+    }
+
+    public void reg(View view){
+        Intent intent = new Intent(this, Registration.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.top, R.anim.top1);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void enter(View view) throws NoSuchAlgorithmException {
         EditText e1 = (EditText) findViewById(R.id.login);
@@ -98,7 +108,7 @@ public class Enter extends AppCompatActivity {
         }
     }
 
-    class DBHelper extends SQLiteOpenHelper {
+    static class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context) {
             // конструктор суперкласса

@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">Sensor_project</string>
-    <string name="login">Введите логин:</string>
-    <string name="password">Введите пароль:</string>
+    <string name="app_name">Mysen</string>
+    <string name="login">Введите логин</string>
+    <string name="password">Введите пароль</string>
     <string name="in">Войти</string>
     <string name="registration">Зарегистрироваться</string>
+    <string name="forget">Я забыл пароль</string>
+    <string name="login_r">Придумайте логин</string>
+    <string name="password_r">Придумайте пароль</string>
+    <string name="password_r_r">Повторите пароль</string>
+    <string name="mail_r">Введите почту</string>
+    <string name="mail_r_h">если вы забудете пароль, то на почту прийдет код для восстановления</string>
 </resources>
