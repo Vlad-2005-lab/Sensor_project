@@ -35,7 +35,8 @@
             android:hint="@string/login"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/password"
@@ -47,7 +48,8 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/reg"
@@ -57,7 +59,8 @@
             android:background="@drawable/round_button"
             android:onClick="enter"
             android:text="@string/in"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView2"
@@ -66,7 +69,8 @@
             android:layout_marginBottom="70dp"
             android:gravity="center"
             android:onClick="forget"
-            android:text="@string/forget" />
+            android:text="@string/forget"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/registration"
@@ -76,7 +80,8 @@
             android:background="@drawable/round_button_gray"
             android:onClick="reg"
             android:text="@string/registration"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
