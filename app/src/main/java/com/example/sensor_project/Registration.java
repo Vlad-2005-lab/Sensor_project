@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,8 @@ public class Registration extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration);
     }
+
+    public void registrate_new_user(View view){}
 
     @Override
     public void onBackPressed() {
