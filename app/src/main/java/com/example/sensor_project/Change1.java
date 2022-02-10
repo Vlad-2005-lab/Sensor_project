@@ -37,8 +37,15 @@ public class Change1 extends AppCompatActivity {
             intent.putExtra("id", ans);
             // запуск SecondActivity
             startActivity(intent);
+            overridePendingTransition(0, 0);
             this.finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
     }
 
     class AsyncRequest extends AsyncTask<String, Integer, String> {

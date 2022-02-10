@@ -20,6 +20,8 @@ public class Change2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle arguments = getIntent().getExtras();
+        String id = arguments.get("id").toString();
         setContentView(R.layout.activity_change_password);
     }
 
