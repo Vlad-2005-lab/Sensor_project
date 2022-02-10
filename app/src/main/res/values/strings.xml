@@ -12,4 +12,5 @@
     <string name="mail_r_h">если вы забудете пароль, то на почту придет код для восстановления</string>
     <string name="dalee">Далее</string>
     <string name="vvedite_kod">Введите код</string>
+    <string name="transit_logo">chivapchichi</string>
 </resources>

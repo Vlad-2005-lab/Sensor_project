@@ -14,8 +14,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Change extends AppCompatActivity {
-    static String da_rightcode = "42069420";
+public class Change2 extends AppCompatActivity {
+//    static String da_rightcode = "42069420";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,13 @@ public class Change extends AppCompatActivity {
         EditText da_code_edittext = (EditText) findViewById(R.id.code);
         String da_code = da_code_edittext.getText().toString();
 
-//        AsyncRequest a = new AsyncRequest();
-//        String ans = a.doInBackground();
+        Bundle arguments = getIntent().getExtras();
+        String id = arguments.get("id").toString();
 
-        if (da_code.equals(da_rightcode)) {
+        AsyncRequest a = new AsyncRequest();
+        String ans = a.doInBackground(id, da_code);
+
+        if (ans.equals("yes")) {
             Toast.makeText(getApplicationContext(), "Код правильный", Toast.LENGTH_LONG).show();
         }
         else {
@@ -53,7 +56,7 @@ public class Change extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://watersensors.herokuapp.com" + "/check_user?l=" + arg[0] + "&p=" + arg[1];
+            String url = "https://watersensors.herokuapp.com" + "/check_mail?i=" + arg[0] + "&c=" + arg[1];
             System.out.println(url);
             StringBuffer response;
             try {

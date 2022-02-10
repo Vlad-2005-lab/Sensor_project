@@ -14,5 +14,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/orange</item>
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/orange</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/transition_logo
+        </item>
+
+        <item name="android:windowSharedElementExitTransition">
+            @transition/transition_logo
+        </item>
     </style>
 </resources>

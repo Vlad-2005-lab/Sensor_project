@@ -62,12 +62,30 @@ public class Enter extends AppCompatActivity {
     }
 
     public void forget(View view){
-        Intent intent = new Intent(this, Change.class);
+        Intent intent = new Intent(this, Change1.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
 
     public void reg(View view){
+
+//        Bundle bundle = null;
+//
+//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+//            View v = findViewById(R.id.textView);
+//            if (v != null) {
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, v, getString(R.string.transit_logo));
+//                bundle = options.toBundle();
+//            }
+//        }
+//
+//        Intent intent = new Intent(this, Registration.class);
+//        if (bundle == null) {
+//            startActivity(intent);
+//        } else {
+//            startActivity(intent, bundle);
+//        }
+
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
         overridePendingTransition(R.anim.top, R.anim.top1);
@@ -85,9 +103,8 @@ public class Enter extends AppCompatActivity {
         password = bytesToHex(encodedhash);
 
         AsyncRequest a = new AsyncRequest();
-//        System.out.println(password);
-        String ans = a.doInBackground(login, password);;
-        System.out.println(ans);
+        String ans = a.doInBackground(login, password);
+//        System.out.println(ans);
         if (ans.contains("not ok")){
             Toast.makeText(this, "Введены неверные данные", Toast.LENGTH_SHORT).show();
             e2.setText("");

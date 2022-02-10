@@ -32,9 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu"></activity>
-        <activity android:name=".Registration"></activity>
-        <activity android:name=".Change"
+        <activity android:name=".MainMenu" />
+        <activity android:name=".Registration" />
+        <activity
+            android:name=".Change1"
+            android:exported="false" />
+        <activity android:name=".Change2"
             android:exported="false" />
     </application>
 </manifest>
