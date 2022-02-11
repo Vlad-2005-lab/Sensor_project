@@ -48,7 +48,7 @@ public class Change1 extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
-    class AsyncRequest extends AsyncTask<String, Integer, String> {
+    static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... arg) {

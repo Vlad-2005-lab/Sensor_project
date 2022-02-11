@@ -3,6 +3,7 @@ package com.example.sensor_project;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +40,7 @@ public class Enter extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.query("sq", null, null, null, null, null, null);
+        @SuppressLint("Recycle") Cursor c = db.query("sq", null, null, null, null, null, null);
         if (c.moveToFirst()) {
             Intent intent = new Intent(this, MainMenu.class);
             startActivity(intent);
@@ -51,9 +52,9 @@ public class Enter extends AppCompatActivity {
 
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
                 hexString.append('0');
             }
             hexString.append(hex);
@@ -114,7 +115,7 @@ public class Enter extends AppCompatActivity {
             ContentValues cv = new ContentValues();
             DBHelper dbHelper = new DBHelper(this);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor c = db.query("sq", null, null, null, null, null, null);
+            @SuppressLint("Recycle") Cursor c = db.query("sq", null, null, null, null, null, null);
             cv.put("yes", "1");
             cv.put("my_id", Integer.parseInt(ans));
             db.insert("sq", null, cv);
@@ -144,7 +145,7 @@ public class Enter extends AppCompatActivity {
         }
     }
 
-    class AsyncRequest extends AsyncTask<String, Integer, String> {
+    static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... arg) {

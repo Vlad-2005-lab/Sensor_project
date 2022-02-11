@@ -63,7 +63,7 @@ public class Registration extends AppCompatActivity{
         overridePendingTransition(R.anim.down,R.anim.down1);
     }
 
-    class AsyncRequest extends AsyncTask<String, Integer, String> {
+    static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... arg) {

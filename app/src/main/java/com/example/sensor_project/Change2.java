@@ -67,7 +67,7 @@ public class Change2 extends AppCompatActivity {
         }
     }
 
-    class AsyncRequest extends AsyncTask<String, Integer, String> {
+    static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... arg) {
