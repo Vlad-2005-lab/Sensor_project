@@ -39,5 +39,6 @@
             android:exported="false" />
         <activity android:name=".Change2"
             android:exported="false" />
+        <activity android:name=".Change3" />
     </application>
 </manifest>

@@ -2,6 +2,7 @@ package com.example.sensor_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -48,7 +49,6 @@ public class Change2 extends AppCompatActivity {
     }
 
     public void check_code(View view) {
-        Button code_button = (Button) findViewById(R.id.next);
         EditText da_code_edittext = (EditText) findViewById(R.id.code);
         String da_code = da_code_edittext.getText().toString();
 
@@ -59,7 +59,11 @@ public class Change2 extends AppCompatActivity {
         String ans = a.doInBackground("check_mail", id, da_code);
 
         if (ans.equals("yes")) {
-            Toast.makeText(getApplicationContext(), "Код правильный", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, Change3.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            this.finish();
         }
         else {
             Toast.makeText(getApplicationContext(), "Попробуйте ещё раз", Toast.LENGTH_LONG).show();

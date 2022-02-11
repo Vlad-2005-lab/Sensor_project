@@ -1,15 +1,9 @@
 package com.example.sensor_project;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,45 +19,43 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Registration extends AppCompatActivity{
+public class Change3 extends AppCompatActivity {
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registration);
+        setContentView(R.layout.change_password_2);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void registrate_new_user(View view) throws NoSuchAlgorithmException {
-        String login = ((EditText) findViewById(R.id.login_r)).getText().toString();
-        String mail = ((EditText) findViewById(R.id.mail_r)).getText().toString();
-        String password = ((EditText) findViewById(R.id.password_r)).getText().toString();
-        String password_r = ((EditText) findViewById(R.id.password_repeat)).getText().toString();
-        if (password.equals(password_r) && password.length() >= 8) {
+    public void save_new_password(View view) throws NoSuchAlgorithmException {
+        EditText edit_password = (EditText) findViewById(R.id.new_password);
+        EditText edit_password_repeat = (EditText) findViewById(R.id.new_password_repeat);
+        String password = edit_password.getText().toString();
+        String password_repeat = edit_password_repeat.getText().toString();
+
+        Bundle arguments = getIntent().getExtras();
+        String id = arguments.get("id").toString();
+
+        if (password.equals(password_repeat) && password.length() >= 8) {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
             password = bytesToHex(encodedhash);
 
             AsyncRequest a = new AsyncRequest();
-            String ans = a.doInBackground(login, password, mail);
-            if (ans.equals("invalid mail")) {
-                ((EditText) findViewById(R.id.mail_r)).setText("");
-                Toast.makeText(this, "Вы ввели неправильную почту", Toast.LENGTH_LONG).show();
-            } else if (ans.equals("busy")) {
-                ((EditText) findViewById(R.id.login_r)).setText("");
-                Toast.makeText(this, "К сожалению, такой логин занят", Toast.LENGTH_LONG).show();
-            } else {
-                Intent intent = new Intent(this, Enter.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.down, R.anim.down1);
-                this.finish();
-            }
-        } else if (password.equals(password_r) && password.length() < 8) {
-            ((EditText) findViewById(R.id.password_r)).setText("");
-            ((EditText) findViewById(R.id.password_repeat)).setText("");
+            String ans = a.doInBackground(id, password);
+            Intent intent = new Intent(this, Enter.class);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            this.finish();
+        } else if (password.equals(password_repeat) && password.length() < 8) {
+            edit_password.setText("");
+            edit_password_repeat.setText("");
             Toast.makeText(this, "Вы ввели слишком короткий пароль", Toast.LENGTH_LONG).show();
         } else {
-            ((EditText) findViewById(R.id.password_r)).setText("");
-            ((EditText) findViewById(R.id.password_repeat)).setText("");
+            edit_password.setText("");
+            edit_password_repeat.setText("");
             Toast.makeText(this, "Вы ввели разные пароли", Toast.LENGTH_LONG).show();
         }
     }
@@ -80,18 +72,11 @@ public class Registration extends AppCompatActivity{
         return hexString.toString();
     }
 
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.down,R.anim.down1);
-    }
-
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://watersensors.herokuapp.com" + "/create_user?l=" + arg[0] + "&p=" + arg[1] + "&m=" + arg[2];
+            String url = "https://watersensors.herokuapp.com" + "/change_user_password?i=" + arg[0] + "&p=" + arg[1];
             StringBuffer response;
             try {
                 URL obj = new URL(url);

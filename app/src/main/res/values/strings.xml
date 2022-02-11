@@ -5,13 +5,14 @@
     <string name="in">Войти</string>
     <string name="registration">Зарегистрироваться</string>
     <string name="forget">Я забыл пароль</string>
-    <string name="login_r">Логин</string>
-    <string name="password_r">Пароль</string>
+    <string name="login_r">Придумайте логин</string>
+    <string name="password_r">Придумайте пароль</string>
     <string name="password_n">Новый пароль</string>
     <string name="password_r_r">Повторите пароль</string>
     <string name="mail_r">Введите почту</string>
     <string name="mail_r_h">если вы забудете пароль, то на почту придет код для восстановления</string>
     <string name="dalee">Далее</string>
+    <string name="save">Сохранить</string>
     <string name="vvedite_kod">Введите код</string>
     <string name="transit_logo">chivapchichi</string>
 </resources>
