@@ -35,7 +35,6 @@ public class Change2 extends AppCompatActivity {
     }
 
     public void resend(View view){
-        System.out.println();
         if (System.currentTimeMillis() - time >= 30000){
             time = System.currentTimeMillis();
             Bundle arguments = getIntent().getExtras();
@@ -78,7 +77,6 @@ public class Change2 extends AppCompatActivity {
             } else {
                 url = "https://watersensors.herokuapp.com" + "/resend_mail?i=" + arg[1];
             }
-            System.out.println(url);
             StringBuffer response;
             try {
                 URL obj = new URL(url);
@@ -94,8 +92,7 @@ public class Change2 extends AppCompatActivity {
                 }
                 return response.toString();
             } catch (Exception e) {
-                System.out.println("pizdez");
-                System.out.println(e);
+//                System.out.println(e);
                 return "error";
             }
         }

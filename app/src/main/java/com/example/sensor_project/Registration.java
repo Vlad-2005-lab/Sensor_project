@@ -31,10 +31,9 @@ public class Registration extends AppCompatActivity{
         String mail = ((EditText) findViewById(R.id.mail_r)).getText().toString();
         String password = ((EditText) findViewById(R.id.password_r)).getText().toString();
         String password_r = ((EditText) findViewById(R.id.password_repeat)).getText().toString();
-        if (password.equals(password_r)) {
+        if (password.equals(password_r) && password.length() >= 8) {
             AsyncRequest a = new AsyncRequest();
             String ans = a.doInBackground(login, password, mail);
-            System.out.println(ans);
             if (ans.equals("invalid mail")) {
                 ((EditText) findViewById(R.id.mail_r)).setText("");
                 Toast.makeText(this, "Вы ввели неправильную почту", Toast.LENGTH_LONG).show();
@@ -47,6 +46,10 @@ public class Registration extends AppCompatActivity{
                 overridePendingTransition(R.anim.down, R.anim.down1);
                 this.finish();
             }
+        } else if (password.equals(password_r) && password.length() < 8) {
+            ((EditText) findViewById(R.id.password_r)).setText("");
+            ((EditText) findViewById(R.id.password_repeat)).setText("");
+            Toast.makeText(this, "Вы ввели слишком короткий пароль", Toast.LENGTH_LONG).show();
         } else {
             ((EditText) findViewById(R.id.password_r)).setText("");
             ((EditText) findViewById(R.id.password_repeat)).setText("");
@@ -65,7 +68,6 @@ public class Registration extends AppCompatActivity{
         @Override
         protected String doInBackground(String... arg) {
             String url = "https://watersensors.herokuapp.com" + "/create_user?l=" + arg[0] + "&p=" + arg[1] + "&m=" + arg[2];
-            System.out.println(url);
             StringBuffer response;
             try {
                 URL obj = new URL(url);
@@ -81,8 +83,7 @@ public class Registration extends AppCompatActivity{
                 }
                 return response.toString();
             } catch (Exception e) {
-                System.out.println("pizdez");
-                System.out.println(e);
+//                System.out.println(e);
                 return "error";
             }
         }

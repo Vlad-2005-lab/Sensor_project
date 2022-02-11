@@ -104,7 +104,6 @@ public class Enter extends AppCompatActivity {
 
         AsyncRequest a = new AsyncRequest();
         String ans = a.doInBackground(login, password);
-//        System.out.println(ans);
         if (ans.contains("not ok")){
             Toast.makeText(this, "Введены неверные данные", Toast.LENGTH_SHORT).show();
             e2.setText("");
@@ -150,7 +149,6 @@ public class Enter extends AppCompatActivity {
         @Override
         protected String doInBackground(String... arg) {
             String url = "https://watersensors.herokuapp.com" + "/check_user?l=" + arg[0] + "&p=" + arg[1];
-            System.out.println(url);
             StringBuffer response;
             try {
                 URL obj = new URL(url);
@@ -166,8 +164,7 @@ public class Enter extends AppCompatActivity {
                 }
                 return response.toString();
             } catch (Exception e) {
-                System.out.println("pizdez");
-                System.out.println(e);
+//                System.out.println(e);
                 return "error";
             }
         }

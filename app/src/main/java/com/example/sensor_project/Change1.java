@@ -53,7 +53,6 @@ public class Change1 extends AppCompatActivity {
         @Override
         protected String doInBackground(String... arg) {
             String url = "https://watersensors.herokuapp.com" + "/exist_user?l=" + arg[0];
-            System.out.println(url);
             StringBuffer response;
             try {
                 URL obj = new URL(url);
@@ -69,8 +68,7 @@ public class Change1 extends AppCompatActivity {
                 }
                 return response.toString();
             } catch (Exception e) {
-                System.out.println("pizdez");
-                System.out.println(e);
+//                System.out.println(e);
                 return "error";
             }
         }
