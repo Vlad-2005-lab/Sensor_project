@@ -13,15 +13,18 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalTime;
 
 public class Change2 extends AppCompatActivity {
 //    static String da_rightcode = "42069420";
+    static long time = System.currentTimeMillis();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle arguments = getIntent().getExtras();
-        String id = arguments.get("id").toString();
+//        Bundle arguments = getIntent().getExtras();
+//        String id = arguments.get("id").toString();
+        Toast.makeText(getApplicationContext(), "Вам на почту отправили код", Toast.LENGTH_SHORT).show();
         setContentView(R.layout.activity_change_password);
     }
 
@@ -32,7 +35,17 @@ public class Change2 extends AppCompatActivity {
     }
 
     public void resend(View view){
-
+        System.out.println();
+        if (System.currentTimeMillis() - time >= 30000){
+            time = System.currentTimeMillis();
+            Bundle arguments = getIntent().getExtras();
+            String id = arguments.get("id").toString();
+            AsyncRequest a = new AsyncRequest();
+            String ans = a.doInBackground("resend_mail", id);
+            Toast.makeText(getApplicationContext(), "Вам на почту отправили новый код", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Новый код можно будет получить через " +  (30 - (System.currentTimeMillis() - time) / 1000), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void check_code(View view) {
@@ -44,13 +57,14 @@ public class Change2 extends AppCompatActivity {
         String id = arguments.get("id").toString();
 
         AsyncRequest a = new AsyncRequest();
-        String ans = a.doInBackground(id, da_code);
+        String ans = a.doInBackground("check_mail", id, da_code);
 
         if (ans.equals("yes")) {
             Toast.makeText(getApplicationContext(), "Код правильный", Toast.LENGTH_LONG).show();
         }
         else {
             Toast.makeText(getApplicationContext(), "Попробуйте ещё раз", Toast.LENGTH_LONG).show();
+            da_code_edittext.setText("");
         }
     }
 
@@ -58,7 +72,12 @@ public class Change2 extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://watersensors.herokuapp.com" + "/check_mail?i=" + arg[0] + "&c=" + arg[1];
+            String url;
+            if (arg[0].equals("check_mail")){
+                url = "https://watersensors.herokuapp.com" + "/check_mail?i=" + arg[1] + "&c=" + arg[2];
+            } else {
+                url = "https://watersensors.herokuapp.com" + "/resend_mail?i=" + arg[1];
+            }
             System.out.println(url);
             StringBuffer response;
             try {
