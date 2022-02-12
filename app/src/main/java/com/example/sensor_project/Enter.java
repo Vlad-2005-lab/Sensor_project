@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,8 @@ public class Enter extends AppCompatActivity {
         @SuppressLint("Recycle") Cursor c = db.query("sq", null, null, null, null, null, null);
         if (c.moveToFirst()) {
             Intent intent = new Intent(this, MainMenu.class);
+//            System.out.println();
+            intent.putExtra("id", Integer.toString(c.getInt(0)));
             startActivity(intent);
             this.finish();
         } else {
@@ -111,7 +114,19 @@ public class Enter extends AppCompatActivity {
         } else if (ans.contains("error")) {
             Toast.makeText(this, "Извините, сервер сейчас не доступен, попробуйте позже", Toast.LENGTH_SHORT).show();
         } else {
+            Bundle bundle = null;
+
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                View v = findViewById(R.id.textView);
+                if (v != null) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, v, getString(R.string.transit_logo));
+                    bundle = options.toBundle();
+                    bundle.putString("id", ans);
+                }
+            }
+
             Intent intent = new Intent(this, MainMenu.class);
+
             ContentValues cv = new ContentValues();
             DBHelper dbHelper = new DBHelper(this);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -120,7 +135,13 @@ public class Enter extends AppCompatActivity {
             cv.put("my_id", Integer.parseInt(ans));
             db.insert("sq", null, cv);
             cv.clear();
-            startActivity(intent);
+
+            intent.putExtra("id", ans);
+            if (bundle == null) {
+                startActivity(intent);
+            } else {
+                startActivity(intent, bundle);
+            }
             this.finish();
         }
     }

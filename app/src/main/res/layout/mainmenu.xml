@@ -4,16 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
-    tools:context=".Enter">
+    android:padding="0dp"
+    tools:context=".MainMenu">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="end"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/orange"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_weight="100"
+                android:fontFamily="@font/allerta"
+                android:gravity="start|center_vertical"
+                android:paddingLeft="20dp"
+                android:text="@string/app_name"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:transitionName="@string/transit_logo" />
+
+            <ImageButton
+                android:id="@+id/menu"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="#00000000"
+                android:onClick="showPopupMenu"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dots" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/lent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:id="@+id/ln"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="-70dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/circle_button"
+            android:cropToPadding="true"
+            android:onClick="add_sensors"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/plus"
+            tools:ignore="VectorDrawableCompat" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

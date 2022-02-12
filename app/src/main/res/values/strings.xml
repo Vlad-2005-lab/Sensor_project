@@ -15,4 +15,22 @@
     <string name="save">Сохранить</string>
     <string name="vvedite_kod">Введите код</string>
     <string name="transit_logo">chivapchichi</string>
+    <string name="exit">Выйти</string>
+    <string name="exit_delete">Выйти и удалить аккаунт</string>
+    <string name="add">Добавить датчик</string>
+    <string name="back">Назад</string>
+    <string name="id">Номер датчика</string>
+    <string name="name">Название датчика</string>
+    <string name="change">Изменить пароль</string>
+    <string name="change_m">Изменить почту</string>
+    <string name="message_exit">Вы точно хотите выйти?</string>
+    <string name="message_exit_delete">Вы точно хотите выйти и удалить аккаунт?</string>
+    <string name="message_change_password">Вы точно хотите изменить пароль?</string>
+    <string name="message_change_mail">Вы точно хотите изменить почту?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <!--    Toast messages    -->
+    <string name="does_not_exist_sensor">Сенсора с таким номером не существует</string>
+    <!--    Errors    -->
+    <string name="nobody_knows">Произошла ошибка, задите снова</string>
 </resources>
