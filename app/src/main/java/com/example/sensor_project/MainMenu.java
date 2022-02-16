@@ -220,7 +220,13 @@ public class MainMenu extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),
                                                 "Ты меняешь пароль",
                                                 Toast.LENGTH_SHORT).show();
+                                        // создание объекта Intent для запуска смены пароля
+                                        Intent intent1 = new Intent(this, Change2.class);
                                         dialog.dismiss(); // Отпускает диалоговое окно
+                                        // запуск смены пароля
+                                        startActivity(intent1);
+                                        overridePendingTransition(0, 0);
+
                                     }
                                 });
                                 builder1.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
@@ -246,7 +252,13 @@ public class MainMenu extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),
                                                 "Ты меняешь почту",
                                                 Toast.LENGTH_SHORT).show();
+                                        // создание объекта Intent для запуска смены почты
+                                        Intent intent = new Intent(this, Change1.class);
                                         dialog.dismiss(); // Отпускает диалоговое окно
+                                        // запуск смены почты
+                                        startActivity(intent);
+                                        overridePendingTransition(0, 0);
+
                                     }
                                 });
                                 builder2.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
