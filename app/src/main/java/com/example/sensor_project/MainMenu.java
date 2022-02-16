@@ -358,7 +358,10 @@ public class MainMenu extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),
                                                 "Ты меняешь пароль",
                                                 Toast.LENGTH_SHORT).show();
+                                        Intent intent1 = new Intent(MainMenu.this, Change2.class); // Переход на смену пароля
                                         dialog.dismiss(); // Отпускает диалоговое окно
+                                        startActivity(intent1);
+
                                     }
                                 });
                                 builder1.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
@@ -367,7 +370,9 @@ public class MainMenu extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),
                                                 "Ты отказалася",
                                                 Toast.LENGTH_SHORT).show();
+                                        Intent intent2 = new Intent(MainMenu.this, Change1.class); // Переход на смену почты
                                         dialog.dismiss(); // Отпускает диалоговое окно
+                                        startActivity(intent2);
                                     }
                                 });
                                 AlertDialog dialog1 = builder1.create();

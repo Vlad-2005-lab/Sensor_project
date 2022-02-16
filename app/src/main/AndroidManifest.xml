@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sensor_project">
+        <activity
+            android:name=".ChangeEmail"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -23,9 +26,8 @@
 
         <activity
             android:name=".Enter"
-            android:screenOrientation="portrait"
-            android:exported="true">
-
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,9 +39,11 @@
         <activity
             android:name=".Change1"
             android:exported="false" />
-        <activity android:name=".Change2"
+        <activity
+            android:name=".Change2"
             android:exported="false" />
         <activity android:name=".Change3" />
         <activity android:name=".Add_sensor" />
     </application>
+
 </manifest>
