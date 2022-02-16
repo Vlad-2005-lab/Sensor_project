@@ -23,14 +23,16 @@
     <string name="name">Название датчика</string>
     <string name="change">Изменить пароль</string>
     <string name="change_m">Изменить почту</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <!--    Toast or dialog messages    -->
+    <string name="does_not_exist_sensor">Сенсора с таким номером не существует</string>
     <string name="message_exit">Вы точно хотите выйти?</string>
     <string name="message_exit_delete">Вы точно хотите выйти и удалить аккаунт?</string>
     <string name="message_change_password">Вы точно хотите изменить пароль?</string>
     <string name="message_change_mail">Вы точно хотите изменить почту?</string>
-    <string name="yes">Да</string>
-    <string name="no">Нет</string>
-    <!--    Toast messages    -->
-    <string name="does_not_exist_sensor">Сенсора с таким номером не существует</string>
+    <string name="message_delete_sensor">Вы точно хотите удалить сенсор?</string>
     <!--    Errors    -->
     <string name="nobody_knows">Произошла ошибка, задите снова</string>
+    <string name="no_sensor">Такого сенсора нет</string>
 </resources>
