@@ -31,6 +31,8 @@
     <string name="no">Нет</string>
     <!--    Toast messages    -->
     <string name="does_not_exist_sensor">Сенсора с таким номером не существует</string>
+    <string name="message_delete_sensor">Вы точно хотите удалить сенсор?</string>
     <!--    Errors    -->
     <string name="nobody_knows">Произошла ошибка, задите снова</string>
+    <string name="no_sensor">Такого сенсора нет</string>
 </resources>

@@ -10,11 +10,15 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ScrollView;
@@ -37,6 +41,11 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainmenu);
         Resources r = this.getResources();
+        int size_1_dp = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                1,
+                r.getDisplayMetrics()
+        );
         int size_5_dp = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
                 5,
@@ -108,12 +117,14 @@ public class MainMenu extends AppCompatActivity {
             linLayout.setLayoutParams(linLayoutParam);
             linLayout.setBackgroundResource(R.drawable.gray_sensor);
             linLayout.setGravity(Gravity.CENTER_VERTICAL);
+            linLayout.setWeightSum(1);
+            linLayout.setId(id_sensor);
 
             View status = new View(getApplicationContext());
             LinearLayout.LayoutParams status_param = new LinearLayout.LayoutParams(size_40_dp, size_40_dp);
             status_param.leftMargin = size_10_dp;
             status.setLayoutParams(status_param);
-            switch (data){
+            switch (data) {
                 case "gray":
                     status.setBackgroundResource(R.drawable.gray);
                     break;
@@ -135,7 +146,7 @@ public class MainMenu extends AppCompatActivity {
             name_view.setText(name);
             name_view.setTextColor(Color.rgb(0, 0, 0));
             name_view.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-            name_view.setTextSize(22);
+            name_view.setTextSize(18);
 
             LinearLayout layout_for_edit = new LinearLayout(getApplicationContext());
             layout_for_edit.setOrientation(LinearLayout.HORIZONTAL);
@@ -143,28 +154,155 @@ public class MainMenu extends AppCompatActivity {
             layout_for_edit.setLayoutParams(layout_for_edit_param);
             layout_for_edit.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
 
-            View status1 = new View(getApplicationContext());
+            ImageButton edit = new ImageButton(getApplicationContext());
             LinearLayout.LayoutParams status_param1 = new LinearLayout.LayoutParams(size_40_dp, size_40_dp);
             status_param1.rightMargin = size_10_dp;
-            status1.setLayoutParams(status_param1);
-            switch (data){
-                case "gray":
-                    status1.setBackgroundResource(R.drawable.gray);
-                    break;
-                case "red":
-                    status1.setBackgroundResource(R.drawable.red);
-                    break;
-                case "yellow":
-                    status1.setBackgroundResource(R.drawable.yellow);
-                    break;
-                case "green":
-                    status1.setBackgroundResource(R.drawable.green);
-                    break;
-            }
+            edit.setLayoutParams(status_param1);
+            edit.setImageResource(R.drawable.edit);
+            edit.setBackgroundResource(R.drawable.gray);
+            edit.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            edit.setPadding(0, size_5_dp / 5 * 3, 0, 0);
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LinearLayout block = (LinearLayout) findViewById(id_sensor);
+                    String name = ((TextView) block.getChildAt(block.getChildCount() - 2)).getText().toString();
+                    block.removeViewAt(block.getChildCount() - 2);
+//                    block.removeViewAt(0);
+
+                    EditText edit_view = new EditText(getApplicationContext());
+                    LinearLayout.LayoutParams edit_view_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, size_40_dp);
+                    edit_view_params.leftMargin = size_10_dp;
+                    edit_view_params.rightMargin = size_10_dp * 16 - size_1_dp * 8;
+                    edit_view.setLayoutParams(edit_view_params);
+                    edit_view.setText(name);
+                    edit_view.setTextColor(Color.rgb(0, 0, 0));
+                    edit_view.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+                    edit_view.setBackgroundResource(R.drawable.add_style);
+                    edit_view.setTextSize(18);
+                    edit_view.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+                    block.addView(edit_view, 1);
+
+                    LinearLayout buttons = (LinearLayout) block.getChildAt(block.getChildCount() - 1);
+                    buttons.removeAllViews();
+
+                    LinearLayout.LayoutParams buttons_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                    buttons_params.leftMargin = -size_10_dp * 15;
+                    buttons.setLayoutParams(buttons_params);
+                    buttons.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+
+                    ImageButton ok = new ImageButton(getApplicationContext());
+                    LinearLayout.LayoutParams ok_param1 = new LinearLayout.LayoutParams(size_40_dp, size_40_dp);
+                    ok_param1.rightMargin = size_5_dp;
+                    ok.setLayoutParams(ok_param1);
+                    ok.setImageResource(R.drawable.ic_baseline_check_24);
+                    ok.setBackgroundResource(R.drawable.green);
+                    ok.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    ok.setPadding(size_5_dp, size_5_dp, size_5_dp, size_5_dp);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            LinearLayout block = (LinearLayout) findViewById(id_sensor);
+                            AsyncRequest c = new AsyncRequest();
+                            String name = ((EditText) block.getChildAt(1)).getText().toString();
+                            String ans = c.doInBackground("change_name_sensor", Integer.toString(id_sensor), name);
+                            if (ans.equals("dont_exist")) {
+                                Toast.makeText(getApplicationContext(), R.string.no_sensor, Toast.LENGTH_SHORT).show();
+                                mainlayout.removeView(block);
+                            } else {
+                                block.removeViewAt(1);
+                                ((LinearLayout) block.getChildAt(block.getChildCount() - 1)).removeAllViews();
+
+                                TextView name_view = new TextView(getApplicationContext());
+                                LinearLayout.LayoutParams name_view_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, size_40_dp);
+                                name_view_params.leftMargin = size_10_dp;
+                                name_view.setLayoutParams(name_view_params);
+                                name_view.setText(name);
+                                name_view.setTextColor(Color.rgb(0, 0, 0));
+                                name_view.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+                                name_view.setTextSize(18);
+
+                                block.addView(name_view, 1);
+                                ((LinearLayout) block.getChildAt(block.getChildCount() - 1)).addView(edit);
+                            }
+                        }
+                    });
+
+                    ImageButton cancel = new ImageButton(getApplicationContext());
+                    LinearLayout.LayoutParams cancel_param = new LinearLayout.LayoutParams(size_40_dp, size_40_dp);
+                    cancel_param.rightMargin = size_5_dp;
+                    cancel.setLayoutParams(cancel_param);
+                    cancel.setImageResource(R.drawable.ic_baseline_clear_24);
+                    cancel.setBackgroundResource(R.drawable.red);
+                    cancel.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    cancel.setPadding(size_5_dp, size_5_dp, size_5_dp, size_5_dp);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            LinearLayout block = (LinearLayout) findViewById(id_sensor);
+                            String name = a.doInBackground("get_sensor_name", Integer.toString(id_sensor));
+                            block.removeViewAt(1);
+                            ((LinearLayout) block.getChildAt(block.getChildCount() - 1)).removeAllViews();
+
+                            TextView name_view = new TextView(getApplicationContext());
+                            LinearLayout.LayoutParams name_view_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, size_40_dp);
+                            name_view_params.leftMargin = size_10_dp;
+                            name_view.setLayoutParams(name_view_params);
+                            name_view.setText(name);
+                            name_view.setTextColor(Color.rgb(0, 0, 0));
+                            name_view.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+                            name_view.setTextSize(18);
+
+                            block.addView(name_view, 1);
+                            ((LinearLayout) block.getChildAt(block.getChildCount() - 1)).addView(edit);
+                        }
+                    });
+
+                    ImageButton delete = new ImageButton(getApplicationContext());
+                    LinearLayout.LayoutParams delete_param = new LinearLayout.LayoutParams(size_40_dp, size_40_dp);
+                    delete_param.rightMargin = size_10_dp;
+                    delete.setLayoutParams(delete_param);
+                    delete.setImageResource(R.drawable.ic_baseline_delete_24);
+                    delete.setBackgroundResource(R.drawable.red);
+                    delete.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    delete.setPadding(size_5_dp, size_5_dp, size_5_dp, size_5_dp);
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder builder4 = new AlertDialog.Builder(MainMenu.this);
+                            builder4.setMessage(R.string.message_delete_sensor);
+                            builder4.setCancelable(true);
+                            builder4.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Кнопка ОК
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String ans = a.doInBackground("delete_sensor", id, Integer.toString(id_sensor));
+                                    if (ans.equals("doesnt_exist")){
+                                        Toast.makeText(getApplicationContext(), R.string.no_sensor, Toast.LENGTH_SHORT).show();
+                                    }
+                                    mainlayout.removeView(block);
+                                    dialog.dismiss(); // Отпускает диалоговое окно
+                                }
+                            });
+                            builder4.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss(); // Отпускает диалоговое окно
+                                }
+                            });
+                            AlertDialog dialog4 = builder4.create();
+                            dialog4.show();
+                        }
+                    });
+
+                    buttons.addView(ok);
+                    buttons.addView(cancel);
+                    buttons.addView(delete);
+                }
+            });
 
             linLayout.addView(status);
             linLayout.addView(name_view);
-            layout_for_edit.addView(status1);
+            layout_for_edit.addView(edit);
             linLayout.addView(layout_for_edit);
             mainlayout.addView(linLayout);
         }
@@ -355,6 +493,10 @@ public class MainMenu extends AppCompatActivity {
                 url = "https://watersensors.herokuapp.com" + "/get_sensors?i=" + arg[1];
             } else if (arg[0].equals("get_sensor_name")) {
                 url = "https://watersensors.herokuapp.com" + "/get_sensor_name?i=" + arg[1];
+            } else if (arg[0].equals("change_name_sensor")) {
+                url = "https://watersensors.herokuapp.com" + "/change_name_sensor?i=" + arg[1] + "&n=" + arg[2];
+            } else if (arg[0].equals("delete_sensor")) {
+                url = "https://watersensors.herokuapp.com" + "/delete_sensor?i=" + arg[1] + "&s=" + arg[2];
             } else {
                 url = "https://watersensors.herokuapp.com" + "/get_data_sensor?i=" + arg[1];
             }
