@@ -76,7 +76,7 @@ public class Change3 extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://watersensors.herokuapp.com" + "/change_user_password?i=" + arg[0] + "&p=" + arg[1];
+            String url = "https://" + "350e-178-72-70-172.ngrok.io" + "/change_user_password?i=" + arg[0] + "&p=" + arg[1];
             StringBuffer response;
             try {
                 URL obj = new URL(url);

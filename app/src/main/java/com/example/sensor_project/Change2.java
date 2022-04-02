@@ -77,9 +77,9 @@ public class Change2 extends AppCompatActivity {
         protected String doInBackground(String... arg) {
             String url;
             if (arg[0].equals("check_mail")){
-                url = "https://watersensors.herokuapp.com" + "/check_mail?i=" + arg[1] + "&c=" + arg[2];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/check_mail?i=" + arg[1] + "&c=" + arg[2];
             } else {
-                url = "https://watersensors.herokuapp.com" + "/resend_mail?i=" + arg[1];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/resend_mail?i=" + arg[1];
             }
             StringBuffer response;
             try {

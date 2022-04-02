@@ -2,6 +2,7 @@ package com.example.sensor_project;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
@@ -20,6 +21,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -28,6 +34,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Enter extends AppCompatActivity {
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -65,13 +72,13 @@ public class Enter extends AppCompatActivity {
         return hexString.toString();
     }
 
-    public void forget(View view){
+    public void forget(View view) {
         Intent intent = new Intent(this, Change1.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
 
-    public void reg(View view){
+    public void reg(View view) {
 
 //        Bundle bundle = null;
 //
@@ -108,7 +115,7 @@ public class Enter extends AppCompatActivity {
 
         AsyncRequest a = new AsyncRequest();
         String ans = a.doInBackground(login, password);
-        if (ans.contains("not ok")){
+        if (ans.contains("not ok")) {
             Toast.makeText(this, "Введены неверные данные", Toast.LENGTH_SHORT).show();
             e2.setText("");
         } else if (ans.contains("error")) {
@@ -170,7 +177,7 @@ public class Enter extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://watersensors.herokuapp.com" + "/check_user?l=" + arg[0] + "&p=" + arg[1];
+            String url = "http://" + "350e-178-72-70-172.ngrok.io" + "/check_user?l=" + arg[0] + "&p=" + arg[1];
             StringBuffer response;
             try {
                 URL obj = new URL(url);
@@ -186,7 +193,7 @@ public class Enter extends AppCompatActivity {
                 }
                 return response.toString();
             } catch (Exception e) {
-//                System.out.println(e);
+                System.out.println(e);
                 return "error";
             }
         }

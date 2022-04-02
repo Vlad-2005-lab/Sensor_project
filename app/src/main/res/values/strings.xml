@@ -35,4 +35,8 @@
     <!--    Errors    -->
     <string name="nobody_knows">Произошла ошибка, задите снова</string>
     <string name="no_sensor">Такого сенсора нет</string>
+
+    <string name="downloading">downloading</string>
+    <string name="domen">350e-178-72-70-172.ngrok.io</string>
+<!--    <string name="domen">watersensors.herokuapp.com</string>-->
 </resources>

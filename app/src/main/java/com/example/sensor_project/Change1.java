@@ -52,7 +52,7 @@ public class Change1 extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://watersensors.herokuapp.com" + "/exist_user?l=" + arg[0];
+            String url = "https://" + "350e-178-72-70-172.ngrok.io" + "/exist_user?l=" + arg[0];
             StringBuffer response;
             try {
                 URL obj = new URL(url);

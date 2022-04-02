@@ -7,7 +7,7 @@
     <color name="gray">#C0C0C0</color>
     <color name="grayLight">#E0E0E0</color>
     <color name="grayDark">#A0A0A0</color>
-    <color name="green">#00FF00</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="red">#FF0000</color>
+    <color name="green">#00EE00</color>
+    <color name="yellow">#EEEE00</color>
+    <color name="red">#EE0000</color>
 </resources>

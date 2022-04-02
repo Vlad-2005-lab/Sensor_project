@@ -91,7 +91,7 @@ public class Registration extends AppCompatActivity{
 
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://watersensors.herokuapp.com" + "/create_user?l=" + arg[0] + "&p=" + arg[1] + "&m=" + arg[2];
+            String url = "https://" + "350e-178-72-70-172.ngrok.io" + "/create_user?l=" + arg[0] + "&p=" + arg[1] + "&m=" + arg[2];
             StringBuffer response;
             try {
                 URL obj = new URL(url);

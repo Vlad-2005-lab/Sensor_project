@@ -97,9 +97,9 @@ public class Add_sensor extends AppCompatActivity {
         protected String doInBackground(String... arg) {
             String url;
             if (arg[0].equals("exist_sensor")) {
-                url = "https://watersensors.herokuapp.com" + "/exist_sensor?i=" + arg[1];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/exist_sensor?i=" + arg[1];
             } else {
-                url = "https://watersensors.herokuapp.com" + "/add_sensor_to_user?i=" + arg[1] + "&is=" + arg[2] + "&n=" + arg[3];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/add_sensor_to_user?i=" + arg[1] + "&is=" + arg[2] + "&n=" + arg[3];
             }
             StringBuffer response;
             try {

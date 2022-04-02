@@ -3,9 +3,12 @@ package com.example.sensor_project;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -26,14 +29,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class MainMenu extends AppCompatActivity {
+
+    String id = "";
+    Intent iq;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -72,7 +81,15 @@ public class MainMenu extends AppCompatActivity {
         LinearLayout mainlayout = (LinearLayout) findViewById(R.id.ln);
 
         Bundle arguments = getIntent().getExtras();
-        String id = arguments.get("id").toString();
+
+
+        ContentValues cv = new ContentValues();
+        Enter.DBHelper dbHelper = new Enter.DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        @SuppressLint("Recycle") Cursor c = db.query("sq", null, null, null, null, null, null);
+        if (c.moveToFirst()) {
+            id = c.getString(0);
+        }
         AsyncRequest a = new AsyncRequest();
         String ans = a.doInBackground("get_sensors", id);
 
@@ -327,6 +344,10 @@ public class MainMenu extends AppCompatActivity {
             }
             this.finish();
         }
+
+        iq = new Intent(this, Fon.class);
+        iq.putExtra("id", id);
+        ContextCompat.startForegroundService(this, iq);
     }
 
     public void add_sensors(View view){
@@ -336,6 +357,7 @@ public class MainMenu extends AppCompatActivity {
         intent.putExtra("id", id);
         startActivity(intent);
         overridePendingTransition(0, 0);
+        stopService(iq);
     }
 
     public void showPopupMenu(View v) {
@@ -358,10 +380,7 @@ public class MainMenu extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),
                                                 "Ты меняешь пароль",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent1 = new Intent(MainMenu.this, Change2.class); // Переход на смену пароля
                                         dialog.dismiss(); // Отпускает диалоговое окно
-                                        startActivity(intent1);
-
                                     }
                                 });
                                 builder1.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
@@ -370,9 +389,7 @@ public class MainMenu extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),
                                                 "Ты отказалася",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent2 = new Intent(MainMenu.this, Change1.class); // Переход на смену почты
                                         dialog.dismiss(); // Отпускает диалоговое окно
-                                        startActivity(intent2);
                                     }
                                 });
                                 AlertDialog dialog1 = builder1.create();
@@ -488,22 +505,21 @@ public class MainMenu extends AppCompatActivity {
         popupMenu.show();
     }
 
-
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... arg) {
             String url;
             if (arg[0].equals("get_sensors")) {
-                url = "https://watersensors.herokuapp.com" + "/get_sensors?i=" + arg[1];
+                url = "http://" + "350e-178-72-70-172.ngrok.io" + "/get_sensors?i=" + arg[1];
             } else if (arg[0].equals("get_sensor_name")) {
-                url = "https://watersensors.herokuapp.com" + "/get_sensor_name?i=" + arg[1];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/get_sensor_name?i=" + arg[1];
             } else if (arg[0].equals("change_name_sensor")) {
-                url = "https://watersensors.herokuapp.com" + "/change_name_sensor?i=" + arg[1] + "&n=" + arg[2];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/change_name_sensor?i=" + arg[1] + "&n=" + arg[2];
             } else if (arg[0].equals("delete_sensor")) {
-                url = "https://watersensors.herokuapp.com" + "/delete_sensor?i=" + arg[1] + "&s=" + arg[2];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/delete_sensor?i=" + arg[1] + "&s=" + arg[2];
             } else {
-                url = "https://watersensors.herokuapp.com" + "/get_data_sensor?i=" + arg[1];
+                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/get_data_sensor?i=" + arg[1];
             }
             StringBuffer response;
             try {
