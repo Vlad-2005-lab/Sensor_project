@@ -73,13 +73,15 @@ public class Change2 extends AppCompatActivity {
 
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
+        String domen = "a339-178-72-68-143.ngrok.io";
+
         @Override
         protected String doInBackground(String... arg) {
             String url;
             if (arg[0].equals("check_mail")){
-                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/check_mail?i=" + arg[1] + "&c=" + arg[2];
+                url = "https://" + domen + "/check_mail?i=" + arg[1] + "&c=" + arg[2];
             } else {
-                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/resend_mail?i=" + arg[1];
+                url = "https://" + domen + "/resend_mail?i=" + arg[1];
             }
             StringBuffer response;
             try {

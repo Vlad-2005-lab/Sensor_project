@@ -95,7 +95,7 @@ public class Fon extends Service {
         public void run() {
             while (true){
                 try{
-                if (System.currentTimeMillis() - LAST_TIME > 5000){
+                if (System.currentTimeMillis() - LAST_TIME > 60000){
                     String sensors = a.doInBackground("get_sensors", Integer.toString(user_id));
                     String[] arr = sensors.split(";");
                     list_id.clear();
@@ -138,15 +138,17 @@ public class Fon extends Service {
 
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
+        String domen = "a339-178-72-68-143.ngrok.io";
+
         @Override
         protected String doInBackground(String... arg) {
             String url;
             if (arg[0].equals("get_sensors")) {
-                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/get_sensors?i=" + arg[1];
+                url = "https://" + domen + "/get_sensors?i=" + arg[1];
             } else if (arg[0].equals("get_sensor_name")) {
-                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/get_sensor_name?i=" + arg[1];
+                url = "https://" + domen + "/get_sensor_name?i=" + arg[1];
             } else {
-                url = "https://" + "350e-178-72-70-172.ngrok.io" + "/get_data_sensor?i=" + arg[1];
+                url = "https://" + domen + "/get_data_sensor?i=" + arg[1];
             }
             StringBuffer response;
             try {

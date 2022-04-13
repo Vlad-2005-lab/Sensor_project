@@ -50,9 +50,11 @@ public class Change1 extends AppCompatActivity {
 
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
+        String domen = "a339-178-72-68-143.ngrok.io";
+
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://" + "350e-178-72-70-172.ngrok.io" + "/exist_user?l=" + arg[0];
+            String url = "https://" + domen + "/exist_user?l=" + arg[0];
             StringBuffer response;
             try {
                 URL obj = new URL(url);

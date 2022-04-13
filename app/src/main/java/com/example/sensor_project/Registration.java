@@ -89,9 +89,11 @@ public class Registration extends AppCompatActivity{
 
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
+        String domen = "a339-178-72-68-143.ngrok.io";
+
         @Override
         protected String doInBackground(String... arg) {
-            String url = "https://" + "350e-178-72-70-172.ngrok.io" + "/create_user?l=" + arg[0] + "&p=" + arg[1] + "&m=" + arg[2];
+            String url = "https://" + domen + "/create_user?l=" + arg[0] + "&p=" + arg[1] + "&m=" + arg[2];
             StringBuffer response;
             try {
                 URL obj = new URL(url);

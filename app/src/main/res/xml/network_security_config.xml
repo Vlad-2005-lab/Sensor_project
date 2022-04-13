@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">350e-178-72-70-172.ngrok.io</domain>
+        <domain includeSubdomains="true">a339-178-72-68-143.ngrok.io</domain>
 <!--        <domain includeSubdomains="true">watersensors.herokuapp.com</domain>-->
     </domain-config>
 </network-security-config>
