@@ -106,7 +106,7 @@ public class Fon extends Service {
                     for (int id_sensor: list_id){
                         String data = a.doInBackground("get_data_sensor", Integer.toString(id_sensor));
                         if (data.equals("red")){
-                            System.out.println("+");
+//                            System.out.println("+");
                             String name = a.doInBackground("get_sensor_name", Integer.toString(id_sensor));
 
                             Intent notificationIntent = new Intent(Fon.this, MainMenu.class);
