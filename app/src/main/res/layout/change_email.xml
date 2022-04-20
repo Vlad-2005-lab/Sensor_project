@@ -11,20 +11,33 @@
         android:layout_height="match_parent"
         android:background="@color/orange"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
 
-        <TextView
-            android:id="@+id/textView3"
+        <EditText
+            android:id="@+id/mail_change1"
+            android:layout_width="200dp"
+            android:layout_height="39dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/round"
+            android:ems="10"
+            android:hint="@string/mail_r"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <Button
+            android:id="@+id/next_change_mail"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="150dp"
-            android:fontFamily="@font/allerta"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_button"
+            android:onClick="dalee"
+            android:text="@string/dalee"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 

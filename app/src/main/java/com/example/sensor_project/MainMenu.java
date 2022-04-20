@@ -155,58 +155,58 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.change:
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainMenu.this);
-//        builder.setTitle("tilte");
-                        builder1.setMessage(R.string.message_change_password);
-                        builder1.setCancelable(true);
-                        builder1.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Кнопка ОК
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Ты меняешь пароль",
-                                        Toast.LENGTH_SHORT).show();
-                                dialog.dismiss(); // Отпускает диалоговое окно
-                            }
-                        });
-                        builder1.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Ты отказалася",
-                                        Toast.LENGTH_SHORT).show();
-                                dialog.dismiss(); // Отпускает диалоговое окно
-                            }
-                        });
-                        AlertDialog dialog1 = builder1.create();
-                        dialog1.show();
-                        return true;
-                    case R.id.change_m:
-                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainMenu.this);
-//        builder.setTitle("tilte");
-                        builder2.setMessage(R.string.message_change_mail);
-                        builder2.setCancelable(true);
-                        builder2.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Кнопка ОК
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Ты меняешь почту",
-                                        Toast.LENGTH_SHORT).show();
-                                dialog.dismiss(); // Отпускает диалоговое окно
-                            }
-                        });
-                        builder2.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Ты отказался",
-                                        Toast.LENGTH_SHORT).show();
-                                dialog.dismiss(); // Отпускает диалоговое окно
-                            }
-                        });
-                        AlertDialog dialog2 = builder2.create();
-                        dialog2.show();
-                        return true;
+//                    case R.id.change:
+//                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainMenu.this);
+////        builder.setTitle("tilte");
+//                        builder1.setMessage(R.string.message_change_password);
+//                        builder1.setCancelable(true);
+//                        builder1.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Кнопка ОК
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(getApplicationContext(),
+//                                        "Ты меняешь пароль",
+//                                        Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss(); // Отпускает диалоговое окно
+//                            }
+//                        });
+//                        builder1.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(getApplicationContext(),
+//                                        "Ты отказалася",
+//                                        Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss(); // Отпускает диалоговое окно
+//                            }
+//                        });
+//                        AlertDialog dialog1 = builder1.create();
+//                        dialog1.show();
+//                        return true;
+//                    case R.id.change_m:
+//                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainMenu.this);
+////        builder.setTitle("tilte");
+//                        builder2.setMessage(R.string.message_change_mail);
+//                        builder2.setCancelable(true);
+//                        builder2.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Кнопка ОК
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(getApplicationContext(),
+//                                        "Ты меняешь почту",
+//                                        Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss(); // Отпускает диалоговое окно
+//                            }
+//                        });
+//                        builder2.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(getApplicationContext(),
+//                                        "Ты отказался",
+//                                        Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss(); // Отпускает диалоговое окно
+//                            }
+//                        });
+//                        AlertDialog dialog2 = builder2.create();
+//                        dialog2.show();
+//                        return true;
                     case R.id.exit:
                         AlertDialog.Builder builder3 = new AlertDialog.Builder(MainMenu.this);
 //        builder.setTitle("tilte");
@@ -257,10 +257,29 @@ public class MainMenu extends AppCompatActivity {
                         builder4.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Кнопка ОК
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Ты вышел и удалил аккаунт",
-                                        Toast.LENGTH_SHORT).show();
-                                dialog.dismiss(); // Отпускает диалоговое окно
+                                MainMenu.this.deleteDatabase("myDB");
+
+                                AsyncRequest a = new AsyncRequest();
+                                String ans = a.doInBackground("delete_me", id);
+//
+                                Bundle bundle = null;
+
+                                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                                    View v = findViewById(R.id.textView5);
+                                    if (v != null) {
+                                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainMenu.this, v, getString(R.string.transit_logo));
+                                        bundle = options.toBundle();
+                                    }
+                                }
+
+                                Intent intent = new Intent(MainMenu.this, Enter.class);
+                                if (bundle == null) {
+                                    startActivity(intent);
+                                } else {
+                                    startActivity(intent, bundle);
+                                }
+                                MainMenu.this.finish();
+                                dialog.dismiss();
                             }
                         });
                         builder4.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() { // Кнопка cansel
@@ -868,7 +887,7 @@ public class MainMenu extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             while (true) {
-                if (Math.abs(System.currentTimeMillis() - last_time) >= 30000) {
+                if (Math.abs(System.currentTimeMillis() - last_time) >= 60000) {
 
                     ContentValues cv = new ContentValues();
                     Enter.DBHelper dbHelper = new Enter.DBHelper(MainMenu.this);
@@ -968,6 +987,9 @@ public class MainMenu extends AppCompatActivity {
                     break;
                 case "delete_sensor":
                     url = "https://" + domen + "/delete_sensor?i=" + arg[1] + "&s=" + arg[2];
+                    break;
+                case "delete_me":
+                    url = "https://" + domen + "/delete_me?i=" + arg[1];
                     break;
                 default:
                     url = "https://" + domen + "/get_data_sensor?i=" + arg[1];
