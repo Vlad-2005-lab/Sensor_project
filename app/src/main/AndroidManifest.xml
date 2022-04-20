@@ -4,8 +4,8 @@
     package="com.example.sensor_project">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +15,10 @@
         android:roundIcon="@mipmap/iconca_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sensor_project">
-        <service android:name=".Fon"
+        <service
+            android:name=".Fon"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -28,8 +29,8 @@
 
         <activity
             android:name=".Enter"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,14 +38,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu" />
-        <activity android:name=".Registration" />
+        <activity
+            android:name=".MainMenu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Registration"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Change1"
-            android:exported="false" />
-        <activity android:name=".Change2"
-            android:exported="false" />
-        <activity android:name=".Change3" />
-        <activity android:name=".Add_sensor" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Change2"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Change3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Add_sensor"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
