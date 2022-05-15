@@ -138,7 +138,7 @@ public class Fon extends Service {
 
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
-        String domen = "a339-178-72-68-143.ngrok.io";
+        String domen = "6727-178-72-68-217.ngrok.io";
 
         @Override
         protected String doInBackground(String... arg) {

@@ -73,7 +73,7 @@ public class Change2 extends AppCompatActivity {
 
     static class AsyncRequest extends AsyncTask<String, Integer, String> {
 
-        String domen = "a339-178-72-68-143.ngrok.io";
+        String domen = "baa1-178-72-68-9.ngrok.io";
 
         @Override
         protected String doInBackground(String... arg) {
